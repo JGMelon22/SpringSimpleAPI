@@ -10,22 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.api.Models.Person;
-import br.com.projeto.api.Repository.Repositorio;
-import net.bytebuddy.asm.Advice.Return;
+import br.com.projeto.api.Repository.PersonRepositorio;
 
 // Annotation para usar rotas
 @RestController
 
-public class Controller {
+public class PersonController {
 
     // Injeção de Dependência
     @Autowired
-    private Repositorio acao;
+    private PersonRepositorio personRepositorio;
 
     // Cadastro
     @PostMapping("/api")
     public Person registerPerson(@RequestBody Person obj) {
-        return acao.save(obj);
+        return personRepositorio.save(obj);
     }
 
     @GetMapping("")
@@ -59,6 +58,6 @@ public class Controller {
 
     @GetMapping("/api")
     public List<Person> fPersons() {
-        return acao.findAll();
+        return personRepositorio.findAll();
     }
 }
